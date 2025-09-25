@@ -1,106 +1,117 @@
-.brands {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.brands p {
-    font-size: 20px;
-    color: #888;
-    margin-bottom: 18px;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid #eee;
-    padding: 14px;
-    border-radius: 10px;
-    background: #fff;
-}
-
-.brand img {
-    max-height: 36px;
-    object-fit: contain;
-}
-
-.brands-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    overflow: hidden;
-    transition: max-height .35s ease;
-    max-height: 240px;
-}
-
-.brands-list.open {
-    max-height: none;
-}
-
-.brands-swiper {
-    display: none;
-}
-
-
-/*desktop*/
-
-@media (max-width:1120px) {
-    .brands-list {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-
-/*tablet*/
-
-@media (max-width:768px) {
-    .brands-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-
-/*mobile*/
-
-@media (max-width: 480px) {
-    .brands-list {
-        display: none;
-    }
-    .brands-swiper {
-        display: block !important;
-    }
-    .swiper-slide {
-        width: 70%;
-        height: 65px;
-        flex-shrink: 0;
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-        border: 1px solid #eee;
-        border-radius: 10px;
-        background: #fff;
-    }
-    .swiper-slide img {
-        max-width: 70%;
-        max-height: 60px;
-        object-fit: contain;
-    }
-    .swiper-slide button {
-        flex-shrink: 0;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        padding: 4px 8px;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-    .swiper-pagination {
-        margin-top: 10px;
-    }
-    .toggle-btn {
-        display: none;
-    }
-}
+ .brands {
+     max-width: 1120px;
+     margin: 0 auto;
+     padding: 20px;
+ }
+ 
+ .brands p {
+     font-size: 20px;
+     color: #888;
+     margin-bottom: 18px;
+ }
+ 
+ .brand {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     border: 1px solid #eee;
+     padding: 14px;
+     border-radius: 10px;
+     background: #fff;
+ }
+ 
+ .brand img {
+     max-height: 36px;
+     object-fit: contain;
+ }
+ 
+ .brand button {
+     background: #fffdfd;
+     color: #ff0000;
+     border: 1px solid red;
+     padding: 6px 12px;
+     border-radius: 20px;
+     cursor: pointer;
+ }
+ /* ---------- DESKTOP GRID ---------- */
+ 
+ .brands-list {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     gap: 15px;
+     overflow: hidden;
+     max-height: 120px;
+     transition: max-height .35s ease;
+ }
+ 
+ .brands-list.open {
+     max-height: none;
+ }
+ 
+ .toggle-btn {
+     margin-top: 10px;
+     cursor: pointer;
+ }
+ /* адаптив для планшета */
+ 
+ @media(max-width:1120px) {
+     .brands-list {
+         grid-template-columns: repeat(3, 1fr);
+     }
+ }
+ 
+ @media(max-width:768px) {
+     .brands-list {
+         grid-template-columns: repeat(2, 1fr);
+     }
+ }
+ /* ---------- MOBILE SWIPER ---------- */
+ 
+ .brands-swiper {
+     display: none;
+ }
+ 
+ @media(max-width:480px) {
+     .brands-list {
+         display: none;
+     }
+     .toggle-btn {
+         display: none;
+     }
+     .brands-swiper {
+         display: block;
+     }
+     .swiper-slide {
+         width: 70%;
+         height: 65px;
+         flex-shrink: 0;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding: 10px;
+         border: 1px solid #eee;
+         border-radius: 10px;
+         background: #fff;
+         box-sizing: border-box;
+         margin-right: 10px;
+     }
+     .swiper-slide img {
+         max-width: 70%;
+         max-height: 60px;
+         margin-left: 5px;
+         object-fit: contain;
+     }
+     .swiper-slide button {
+         flex-shrink: 0;
+         background: #ffffff;
+         border: 1px solid #ff0606;
+         border-radius: 20px;
+         padding: 4px 6px;
+         cursor: pointer;
+         margin-left: 10px;
+         color: #ff0808;
+     }
+     .swiper-pagination {
+         margin-top: 10px;
+     }
+ }

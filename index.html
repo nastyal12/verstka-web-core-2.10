@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brands</title>
+    <title>Brands Swiper + Grid</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+
     <div class="brands">
         <p>Ремонт техники различных брендов</p>
 
@@ -23,6 +25,8 @@
             <div class="brand"><img src="./img/sony.png" alt="Sony"><button>→</button></div>
         </div>
 
+        <button class="toggle-btn">Показать все</button>
+
         <div class="brands-swiper swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide brand"><img src="./img/lenovo.png" alt="Lenovo"><button>→</button></div>
@@ -36,11 +40,42 @@
             </div>
             <div class="swiper-pagination"></div>
         </div>
-
-        <button class="toggle-btn">Показать все</button>
     </div>
 
-    <script src="./dist/bundle.js" type="module"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        const list = document.querySelector('.brands-list');
+        const btn = document.querySelector('.toggle-btn');
+        if (list && btn) {
+            btn.addEventListener('click', () => {
+                list.classList.toggle('open');
+                btn.textContent = list.classList.contains('open') ? 'Скрыть' : 'Показать все';
+            });
+        }
+        let swiper = null;
+
+        function initSwiper() {
+            const width = window.innerWidth;
+            if (width <= 480 && !swiper) {
+                swiper = new Swiper('.brands-swiper', {
+                    slidesPerView: 'auto',
+                    spaceBetween: 12,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    }
+                });
+            } else if (width > 480 && swiper) {
+                swiper.destroy(true, true);
+                swiper = null;
+            }
+        }
+
+        window.addEventListener('resize', initSwiper);
+        document.addEventListener('DOMContentLoaded', initSwiper);
+    </script>
+
 </body>
 
 </html>
