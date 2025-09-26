@@ -47,14 +47,33 @@
     <script>
         const list = document.querySelector('.brands-list');
         const btn = document.querySelector('.toggle-btn');
-        if (list && btn) {
-            btn.addEventListener('click', () => {
-                list.classList.toggle('open');
-                btn.textContent = list.classList.contains('open') ? 'Скрыть' : 'Показать все';
-            });
-        }
         let swiper = null;
 
+        // вычисляем высоту по количеству видимых рядов
+        function getCollapsedHeight(rows = 2) {
+            if (!list) return 0;
+            const items = [...list.querySelectorAll('.brand')];
+            if (!items.length) return 0;
+
+            const tops = [...new Set(items.map(el => el.offsetTop))].sort((a, b) => a - b);
+            const lastRowIndex = Math.min(rows, tops.length) - 1;
+            const lastRowTop = tops[lastRowIndex];
+            const rowItems = items.filter(el => el.offsetTop === lastRowTop);
+            const bottom = Math.max(...rowItems.map(el => el.offsetTop + el.offsetHeight));
+            return bottom - list.offsetTop;
+        }
+
+        // применяем высоту
+        function applyCollapsedHeight() {
+            const collapsedHeight = getCollapsedHeight(2); // показываем 2 ряда
+            if (!list.classList.contains('open')) {
+                list.style.maxHeight = collapsedHeight + 'px';
+            } else {
+                list.style.maxHeight = 'none';
+            }
+        }
+
+        // инициализация swiper
         function initSwiper() {
             const width = window.innerWidth;
             if (width <= 480 && !swiper) {
@@ -72,9 +91,25 @@
             }
         }
 
-        window.addEventListener('resize', initSwiper);
-        document.addEventListener('DOMContentLoaded', initSwiper);
+        if (list && btn) {
+            btn.addEventListener('click', () => {
+                list.classList.toggle('open');
+                btn.textContent = list.classList.contains('open') ? 'Скрыть' : 'Показать все';
+                applyCollapsedHeight();
+            });
+
+            window.addEventListener('resize', () => {
+                applyCollapsedHeight();
+                initSwiper();
+            });
+
+            window.addEventListener('load', () => {
+                applyCollapsedHeight();
+                initSwiper();
+            });
+        }
     </script>
+
 
 </body>
 
